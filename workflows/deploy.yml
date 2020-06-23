@@ -1,0 +1,12 @@
+steps:
+- id: build-img
+  uses: docker://docker:19.03.10
+  args: [build, --tag, mldashboard, .]
+
+- id: stop
+  uses: docker://docker:19.03.10
+  runs: [sh, -c, 'docker stop dash || true']
+
+- id: start
+  uses: docker://docker:19.03.10
+  args: [run, --rm, --detach, --name=dash, -p=80:80, mldashboard]
