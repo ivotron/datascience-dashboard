@@ -4,6 +4,5 @@ ENV NGINX_WORKER_PROCESSES auto
 
 COPY app/requirements.txt /tmp/
 
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
-
-COPY ./app /app
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
