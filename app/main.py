@@ -1,22 +1,3 @@
-import dash
-import dash_html_components as html
-import flask
+from app import app
 
-app = flask.Flask(__name__)
-dash_app = dash.Dash(__name__, server=app, url_base_pathname='/')
-
-dash_app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
-
-colors = {
-    'background': '#111111',
-    'text': '#7FDBFF'
-}
-
-dash_app.layout = html.Div([
-    html.Div([
-        html.H1("My Dashboard", style={'text-align': 'center'})
-    ])
-])
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=80)
+app.run(host="0.0.0.0", port=8080, debug=True)
