@@ -2,3 +2,5 @@
 *.sw?
 
 *__pycache__
+
+app.db
