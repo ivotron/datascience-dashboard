@@ -1,4 +1,7 @@
+Flask-AppBuilder
 dash
 dash-core-components
 dash-html-components
 dash-renderer
+pandas
+pandas_datareader
