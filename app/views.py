@@ -1,6 +1,6 @@
 from flask_appbuilder.baseviews import BaseView
 from flask_appbuilder import expose, has_access
-from . import Dash_App1, Dash_App2
+from .dashboard import Dash_App1, Dash_App2
 from . import appbuilder
 
 
