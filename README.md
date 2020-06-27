@@ -1,28 +1,12 @@
 # ML dashboard
 
-To run locally, clone the repo and then:
+To run locally, clone the repo and then run [`deploy.sh`](./deploy.sh) 
+and the app will be served at <http://localhost:8080>. The `admin` 
+user is created if the app is executed for the first time (password is 
+`admin`) or if the `app/app.db` gets deleted or moved.
+
+To stop the app:
 
 ```bash
-cd ml-dashboard/
-
-docker-compose --file docker/docker-compose.yml up --build -d
+docker-compose -f docker/docker-compose.yml stop
 ```
-
-The above re-builds the image if it's outdated, then starts the app. 
-If the db hasn't been started, it creates it. The app is served at 
-<http://localhost:8080>
-
-
-To create an admin you can execute:
-
-```bash
-docker exec mldashes bash -c \
-    "flask fab create-admin \
-      --username admin \
-      --firstname admin \
-      --lastname admin \
-      --email admin@admin.com \
-      --password admin"
-```
-
-And then you can login with the provided credentials as an administrator.
