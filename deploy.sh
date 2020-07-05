@@ -11,8 +11,10 @@
 #
 set -e
 
-# rebuild app
+# rebuild
 docker-compose -f docker/docker-compose.yml build
+
+# restart
 docker-compose -f docker/docker-compose.yml up --detach
 
 # this is idempotent: if admin user exists, it's not recreated and
