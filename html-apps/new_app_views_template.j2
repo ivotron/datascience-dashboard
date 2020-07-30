@@ -1,0 +1,20 @@
+# {{ app }} section
+
+from .dashboard import {{ app }}
+
+class {{ app }}Class(BaseView):
+    route_base = "/"
+
+    @has_access
+    @expose( "/{{ app }}/" )
+    def methoddash(self):
+        return self.render_template("dash.html", dash_url={{ app }}.url_base, appbuilder=appbuilder)
+
+
+appbuilder.add_view_no_menu({{ app }}Class())
+appbuilder.add_link(
+    "{{ app }}", href="/{{ app }}/", icon="fa-list", category="Dashboard", category_icon="fa-list"
+)
+
+##############################################################################
+

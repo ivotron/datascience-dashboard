@@ -1,0 +1,28 @@
+from dash import Dash
+
+import dash_core_components as dcc
+import dash_html_components as html
+import pandas_datareader as pdr
+from dash.dependencies import Input
+from dash.dependencies import Output
+from .Dash_fun import apply_layout_with_auth, load_object, save_object
+
+url_base = "/dash/{{ app }}/"
+
+#################################################
+
+layout = html.Div(
+    html.Iframe(
+        id='map',
+        srcDoc=open( 'data/{{ app }}/{{ app }}.html', 'r').read(),
+        width='100%',
+        height='700'
+    )
+)
+
+
+def Add_Dash(server, appbuilder):
+    app = Dash(server=server, url_base_pathname=url_base)
+    apply_layout_with_auth(app, layout, appbuilder)
+
+    return app.server

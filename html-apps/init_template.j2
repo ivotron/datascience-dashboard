@@ -20,21 +20,6 @@ appbuilder = AppBuilder(app, db.session)
 
 ##############################################################################
 
-# Dash_App1 section
-
-from .dashboard import Dash_App1
-
-app = Dash_App1.Add_Dash(app, appbuilder)
-
-##############################################################################
-
-# Dash_App2 section
-
-from .dashboard import Dash_App2
-
-app = Dash_App2.Add_Dash(app, appbuilder)
-
-##############################################################################
-
+{{ new_apps }}
 
 from . import views  # noqa

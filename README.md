@@ -1,13 +1,13 @@
 # ML dashboard
 
-To run locally:
+To run locally, install Popper, then:
 
 ```bash
 git clone https://github.com/ivotron/ml-dashboard
 
 cd ml-dashboard/
 
-./deploy.sh
+popper run
 ```
 
 the app will be served at <http://localhost:8080>. The `admin` user is 
