@@ -2,7 +2,11 @@
 
 import os
 import glob
+import yaml
 from jinja2 import Environment, FileSystemLoader
+
+APPS_DIR = "app/dashboard"
+JINJA_DIR = "templates/jinja"
 
 
 def generate_template(template_type, apps):
@@ -10,16 +14,18 @@ def generate_template(template_type, apps):
         print("No apps found...")
         return
 
-    file_loader = FileSystemLoader('html-apps')
+    file_loader = FileSystemLoader(JINJA_DIR)
     env = Environment(loader=file_loader)
 
     outputs = []
-    for app_name in apps:
+    for app in sorted(configs.keys()):
         template = env.get_template(
             'new_app_{}_template.j2'.format(template_type)
         )
         output = template.render(
-            app=app_name
+            app=app,
+            name=configs[app]["name"],
+            category=configs[app]["category"]
         )
         outputs.append(output)
 
@@ -42,7 +48,7 @@ def generate_layout_template(apps):
         print("No apps found...")
         return
 
-    file_loader = FileSystemLoader('html-apps')
+    file_loader = FileSystemLoader(JINJA_DIR)
     env = Environment(loader=file_loader)
 
     for app_name in apps:
@@ -51,39 +57,68 @@ def generate_layout_template(apps):
             app=app_name
         )
 
-        with open("app/dashboard/{}.py".format(app_name), 'w') as f:
+        if not os.path.isdir(os.path.join(APPS_DIR, app_name)):
+            os.mkdir(os.path.join(APPS_DIR, app_name))
+
+        if not os.path.isfile(os.path.join(APPS_DIR, app_name, "__init__.py")):
+            with open(os.path.join(APPS_DIR, app_name, "__init__.py")) as f:
+                pass
+
+        with open(APPS_DIR + "/{0}/{0}.py".format(app_name), 'w') as f:
             f.write(output)
 
 
+def read_config(path):
+    config = {
+        "name": path.split("/")[-2],
+        "category": "Dashboard"
+    }
+
+    if not os.path.isfile(path):
+        return config
+
+    with open(path) as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
+
+    return config
+
 ##############################################################################
 
+
 if __name__ == "__main__":
-    generator_dir = "html-apps"
-    generator_file = "generate_html.*"
-    if os.path.isdir(generator_dir):
-        # list files
-        apps = os.listdir(generator_dir)
+    directories = os.listdir(APPS_DIR)
+
+    generator_file = "generate_html.py"
+    html_apps = []
+    if os.path.isdir(APPS_DIR):
         # filter to only get directory files including generate_html
-        apps = [app for app in apps if glob.glob(os.path.join(
-            generator_dir,
+        html_apps = [app for app in directories if glob.glob(os.path.join(
+            APPS_DIR,
             app,
             generator_file
         ))]
-    else:
-        apps = []
 
-    print("Starting layout templates...")
-    generate_layout_template(apps)
+    print("html apps found: ", html_apps)
 
-    # list all python files in app/dashboard
-    exceptions = ["__init__.py", "Dash_fun.py"]
-    apps = (app for app in os.listdir("app/dashboard") if app.endswith(".py"))
-    apps = (app for app in apps if app not in exceptions)
-    apps = (app.split(".")[0] for app in apps)
-    apps = list(apps)
-    apps = sorted(apps)
+    # get directories with dash apps
+    exceptions = []
+    app_directories = [app for app in directories
+        if os.path.isfile(APPS_DIR + "/{0}/{0}.py".format(app)) and
+        app not in exceptions
+    ] # noqa
 
-    print("Starting views templates...")
-    generate_template("views", apps)
-    print("Starting init templates...")
-    generate_template("init", apps)
+    print("Dash apps found: ", app_directories)
+
+    # get config for each app or use default
+    configs = dict()
+    for app in app_directories:
+        config_path = os.path.join(APPS_DIR, app, "config.yml")
+        configs[app] = read_config(config_path)
+
+    # generate files from templates
+    print("Generating html-app layouts...")
+    generate_layout_template(html_apps)
+    print("Generating views.py ...")
+    generate_template("views", configs)
+    print("Generating __init__.py ...")
+    generate_template("init", configs)

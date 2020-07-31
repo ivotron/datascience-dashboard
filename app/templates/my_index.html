@@ -1,0 +1,93 @@
+{% extends "mybase.html" %}
+{% block content %}
+
+    {% block head_js %}
+        {{ super() }}
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous" defer></script>
+    {% endblock %}
+
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">My Org</h1>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">My Dashboard</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="http://www.myorg.com">My Org</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container">
+            <h2 class="text-center mt-0"><Em>Team</Em></h2>
+            <hr class="divider my-2" />
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <h3 class="h4 mb-2"></h3>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <i class="fas fa-4x fa-user-md text-primary mb-4"></i>
+                        <h3 class="h4 mb-2">Group 1</h3>
+                        <p class="address">
+                            Foo Bar <br>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <i class="fas fa-4x fa-user-cog text-primary mb-4"></i>
+                        <h3 class="h4 mb-2">Group 2</h3>
+                        <p class="address">
+                            Bar Baz <br>
+                            Foo Foo <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call to action-->
+    <section class="page-section bg-dark text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">My Team | My Org</h2>
+            <a class="btn btn-light btn-xl" href="https://webpage.org.com"><i class="fas fa-chart-line fa-3x"></i></a>
+        </div>
+    </section>
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <h2 class="mt-0">Contact</h2>
+                    <hr class="divider my-4" />
+                    <p class="text-muted mb-5">Department</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 ml-auto text-center mb-5 mb-lg-0">
+                    <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                    <div>+52 (666) 666 66 66</div>
+                </div>
+                <div class="col-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                    <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
+                    <a class="d-block" href="mailto:my@org.com">my@org.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+        <div class="container"><div class="small text-center text-muted">Copyright © 2020 My Org </div></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+
+{% endblock %}

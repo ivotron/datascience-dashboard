@@ -6,7 +6,7 @@ from . import appbuilder
 
 # Dash_App1 section
 
-from .dashboard import Dash_App1
+from .dashboard.Dash_App1 import Dash_App1
 
 class Dash_App1Class(BaseView):
     route_base = "/"
@@ -19,14 +19,14 @@ class Dash_App1Class(BaseView):
 
 appbuilder.add_view_no_menu(Dash_App1Class())
 appbuilder.add_link(
-    "Dash_App1", href="/Dash_App1/", icon="fa-list", category="Dashboard", category_icon="fa-list"
+"Dash_App1", href="/Dash_App1/", icon="fa-list", category="Dashboard", category_icon="fa-list"
 )
 
 ##############################################################################
 
 # Dash_App2 section
 
-from .dashboard import Dash_App2
+from .dashboard.Dash_App2 import Dash_App2
 
 class Dash_App2Class(BaseView):
     route_base = "/"
@@ -39,7 +39,5 @@ class Dash_App2Class(BaseView):
 
 appbuilder.add_view_no_menu(Dash_App2Class())
 appbuilder.add_link(
-    "Dash_App2", href="/Dash_App2/", icon="fa-list", category="Dashboard", category_icon="fa-list"
+"Dash_App2", href="/Dash_App2/", icon="fa-list", category="Dashboard", category_icon="fa-list"
 )
-
-##############################################################################

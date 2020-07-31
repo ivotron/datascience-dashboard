@@ -6,4 +6,7 @@
 app.db
 
 __*_venv__
+*.csv
 *.html
+
+Datos-Covid19

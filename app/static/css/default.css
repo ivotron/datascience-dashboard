@@ -1,0 +1,7 @@
+iframe {
+    position: absolute;
+    background: transparent;
+
+    width: 98%;
+    height: 100%;
+}

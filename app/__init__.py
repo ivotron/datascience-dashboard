@@ -3,6 +3,8 @@ import logging
 from flask import Flask
 from flask_appbuilder import AppBuilder, SQLA
 
+from app.index import MyIndexView
+
 """
  Logging configuration
 """
@@ -16,13 +18,13 @@ app.config.from_object("app.config")
 
 db = SQLA(app)
 
-appbuilder = AppBuilder(app, db.session)
+appbuilder = AppBuilder(app, db.session, indexview=MyIndexView, base_template='mybase.html')
 
 ##############################################################################
 
 # Dash_App1 section
 
-from .dashboard import Dash_App1
+from .dashboard.Dash_App1 import Dash_App1
 
 app = Dash_App1.Add_Dash(app, appbuilder)
 
@@ -30,11 +32,12 @@ app = Dash_App1.Add_Dash(app, appbuilder)
 
 # Dash_App2 section
 
-from .dashboard import Dash_App2
+from .dashboard.Dash_App2 import Dash_App2
 
 app = Dash_App2.Add_Dash(app, appbuilder)
 
 ##############################################################################
+
 
 
 from . import views  # noqa

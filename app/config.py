@@ -1,4 +1,5 @@
 import os
+import dash_bootstrap_components as dbc
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -42,16 +43,38 @@ AUTH_ROLE_ADMIN = "Admin"
 AUTH_ROLE_PUBLIC = "Public"
 # APP_NAME = "My App Name"
 # APP_ICON = "static/img/logo.jpg"
-APP_THEME = ""  # default
+# APP_THEME = "default.css"  # default
 # APP_THEME = "cerulean.css"
 # APP_THEME = "amelia.css"
 # APP_THEME = "cosmo.css"
-# APP_THEME = "cyborg.css"
+# APP_THEME = "cyborg.css"  # dark theme with visible dropdowns
 # APP_THEME = "flatly.css"
 # APP_THEME = "journal.css"
 # APP_THEME = "readable.css"
 # APP_THEME = "simplex.css"
-# APP_THEME = "slate.css"
+APP_THEME = "slate.css"  # dark gray theme, visible dropdowns
 # APP_THEME = "spacelab.css"
 # APP_THEME = "united.css"
 # APP_THEME = "yeti.css"
+# APP_THEME = "superhero.css"
+# APP_THEME = "darkly.css"
+
+THEMES = {
+    "default.css": dbc.themes.BOOTSTRAP,
+    "cerulean.css": dbc.themes.CERULEAN,
+    "amelia.css": dbc.themes.BOOTSTRAP,  # no equivalent, sets default
+    "cosmo.css": dbc.themes.COSMO,
+    "cyborg.css": dbc.themes.CYBORG,
+    "flatly.css": dbc.themes.FLATLY,
+    "journal.css": dbc.themes.JOURNAL,
+    "readable.css": dbc.themes.BOOTSTRAP,  # no equivalent, sets default
+    "simplex.css": dbc.themes.SIMPLEX,
+    "slate.css": dbc.themes.SLATE,
+    "spacelab.css": dbc.themes.SPACELAB,
+    "united.css": dbc.themes.UNITED,
+    "yeti.css": dbc.themes.YETI,
+    "superhero.css": dbc.themes.SUPERHERO,
+    "darkly.css": dbc.themes.DARKLY,
+}
+
+BOOTSTRAP_THEME = THEMES[APP_THEME]

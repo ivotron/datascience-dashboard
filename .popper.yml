@@ -5,33 +5,38 @@ steps:
   runs: [bash, -uexc]
   args:
   - |
-    # gets all subdirectories of html-apps
+    # gets all subdirectories of app/dashboard
     # each subdirectory should contain a file to generate apps and their
     # requirements (if any)
-    for app in $(find html-apps/ -maxdepth 1 -mindepth 1 -type d -printf '%f\n'); do
-        if [[ ! -f "html-apps/$app/generate_html.py" ]]; then
-          continue
-        fi
-        cd html-apps/"$app"
+    repo_dir="${PWD}"
+    apps_dir="${repo_dir}/app/dashboard"
+    for app in $(find "${apps_dir}/" -maxdepth 1 -mindepth 1 -type d -printf '%f\n'); do
+      if [[ ! -f "${apps_dir}/${app}/generate_html.py" ]]; then
+        continue
+      fi
 
-        # create and activate virtualenv
-        python -m venv __"$app"_venv__
-        source __"$app"_venv__/bin/activate
+      mkdir -p "data/${app}"
+      cd "${apps_dir}/${app}"
 
-        # install requirements, if any
-        if [[ -f "requirements.txt" ]]; then
-            pip install --upgrade pip
-            pip install -r requirements.txt
-        fi
+      # create and activate virtualenv
+      python -m venv "__${app}_venv__"
+      source "__${app}_venv__/bin/activate"
 
-        # run generator file
-        python generate_html.py
+      # install requirements, if any
+      if [[ -f "requirements.txt" ]]; then
+        pip install --upgrade pip
+        pip install -r requirements.txt
+      fi
 
-        deactivate
-        cd ../..
+      # run generator file
+      cd "${repo_dir}"
+      python "${apps_dir}/${app}/generate_html.py"
+
+      deactivate
     done
 
     pip install jinja2
+    pip install pyyaml
     python generate_template.py
 
 

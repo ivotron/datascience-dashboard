@@ -1,6 +1,6 @@
 # {{ app }} section
 
-from .dashboard import {{ app }}
+from .dashboard.{{ app }} import {{ app }}
 
 class {{ app }}Class(BaseView):
     route_base = "/"
@@ -13,7 +13,7 @@ class {{ app }}Class(BaseView):
 
 appbuilder.add_view_no_menu({{ app }}Class())
 appbuilder.add_link(
-    "{{ app }}", href="/{{ app }}/", icon="fa-list", category="Dashboard", category_icon="fa-list"
+"{{ name }}", href="/{{ app }}/", icon="fa-list", category="{{ category }}", category_icon="fa-list"
 )
 
 ##############################################################################

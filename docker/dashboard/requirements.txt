@@ -5,3 +5,4 @@ dash-html-components
 dash-renderer
 pandas
 pandas_datareader
+dash_bootstrap_components
